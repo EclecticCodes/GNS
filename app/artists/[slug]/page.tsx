@@ -7,6 +7,15 @@ import { NewMusic } from "@/app/Components/NewMusic";
 import { PortableText } from "@portabletext/react";
 import Icon, { IconName } from "@/app/Components/Icon";
 import { PageWrapper } from "@/app/Components/PageWrapper";
+import { getArtists } from "@/sanity/sanity-utils"; // Import your getArtists
+
+export async function generateStaticParams() {
+  const artists = await getArtists(); // ⚡ Use your getArtists function
+
+  return artists.map((artist) => ({
+    slug: artist.slug, // Use the slug field you already formatted
+  }));
+}
 
 type Props = {
   params: { slug: string };
