@@ -1,5 +1,7 @@
+"use client";
+
 import Header from "@/app/Components/Header";
-import { getArtistWithProjects } from "@/sanity/sanity-utils";
+import { getArtistWithProjects, getArtists } from "@/sanity/sanity-utils";
 import React from "react";
 import Polaroid from "../../Components/Polaroid";
 import { TopTracks } from "@/app/artists/[slug]/TopTracks";
@@ -7,13 +9,16 @@ import { NewMusic } from "@/app/Components/NewMusic";
 import { PortableText } from "@portabletext/react";
 import Icon, { IconName } from "@/app/Components/Icon";
 import { PageWrapper } from "@/app/Components/PageWrapper";
-import { getArtists } from "@/sanity/sanity-utils"; // Import your getArtists
 
+// ✨✨ ADD THESE TWO LINES ✨✨
+export const dynamicParams = true;
+export const revalidate = 60; // (in seconds)
+
+// Your existing generateStaticParams
 export async function generateStaticParams() {
-  const artists = await getArtists(); // ⚡ Use your getArtists function
-
+  const artists = await getArtists();
   return artists.map((artist) => ({
-    slug: artist.slug, // Use the slug field you already formatted
+    slug: artist.slug,
   }));
 }
 
