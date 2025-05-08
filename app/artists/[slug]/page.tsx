@@ -1,4 +1,4 @@
-"use client";
+
 
 import Header from "@/app/Components/Header";
 import { getArtistWithProjects, getArtists } from "@/sanity/sanity-utils";
