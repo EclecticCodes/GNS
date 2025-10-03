@@ -1,7 +1,7 @@
 
 
 import Header from "@/app/Components/Header";
-import { getArtistWithProjects, getArtists } from "@/sanity/sanity-utils";
+import { getArtistWithProjects, getArtists } from "@/strapi/strapi-utils";
 import React from "react";
 import Polaroid from "../../Components/Polaroid";
 import { TopTracks } from "@/app/artists/[slug]/TopTracks";
@@ -28,7 +28,7 @@ type Props = {
 
 const ArtistPage = async ({ params: { slug } }: Props) => {
   const { artist, projects } = await getArtistWithProjects(slug);
-  console.log(artist);
+
 
   return (
     <main className="min-h-screen">
@@ -63,7 +63,7 @@ const ArtistPage = async ({ params: { slug } }: Props) => {
                 </h1>
                 <div className="flex flex-row gap-3">
                   {artist?.socialMediaLinks &&
-                    artist.socialMediaLinks.map((link, index) => (
+                    artist.socialMediaLinks.map((link: any, index: number) => (
                       <a
                         key={index}
                         href={link.url}
@@ -79,13 +79,25 @@ const ArtistPage = async ({ params: { slug } }: Props) => {
               <div className="flex md:flex-row flex-col justify-center md:space-x-4 space-y-4 items-center m-auto">
                 <div className="flex flex-1">
                   <Polaroid
-                    profileImage={artist?.profileImage as string}
-                    signature={artist?.signature as string}
+                    profileImage={artist?.profileImage?.url || ''}
+                    signature={artist?.signature || artist?.name || ''}
                   />
                 </div>
                 <div className="max-h-96 overflow-y-auto flex-1 text-2xl custom-scrollbar md:p-4 p-2">
                   {artist?.about ? (
-                    <PortableText value={artist?.about} />
+                    <div className="space-y-4">
+                      {Array.isArray(artist.about) ? (
+                        artist.about.map((block: any, index: number) => (
+                          <p key={index} className="text-lg leading-relaxed">
+                            {block.children?.map((child: any, childIndex: number) => (
+                              <span key={childIndex}>{child.text}</span>
+                            ))}
+                          </p>
+                        ))
+                      ) : (
+                        <p className="text-lg leading-relaxed">{artist.about}</p>
+                      )}
+                    </div>
                   ) : (
                     <p className="text-center">No information available</p>
                   )}

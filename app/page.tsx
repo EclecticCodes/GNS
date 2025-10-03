@@ -2,7 +2,7 @@ import Image from "next/image";
 import Jumbotron from "./Components/Jumbotron";
 import Description from "./Components/Description";
 import type { Metadata } from "next";
-import { getAllArtistsWithFeaturedProjects } from "@/sanity/sanity-utils";
+import { getAllArtistsWithFeaturedProjects } from "@/strapi/strapi-utils";
 import { NewMusic } from "./Components/NewMusic";
 import FeaturedArtists from "./Components/FeaturedArtists";
 import { Artist } from "@/types/Artist";

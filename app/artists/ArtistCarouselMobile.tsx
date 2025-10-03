@@ -55,7 +55,7 @@ const ArtistCarouselMobile = ({
                 className="flex flex-col gap-4 justify-center items-center"
               >
                 <Polaroid
-                  profileImage={selectedArtist.profileImage}
+                  profileImage={selectedArtist.profileImage.url}
                   signature={selectedArtist.signature}
                 />
                 <h3 className="font-bold text-2xl">
