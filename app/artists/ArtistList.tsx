@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { getArtists } from "@/sanity/sanity-utils";
+import { getArtists } from "@/strapi/strapi-utils";
 import Polaroid from "../Components/Polaroid";
 import { Artist } from "@/types/Artist";
 import { motion, AnimatePresence } from "framer-motion";
@@ -102,8 +102,8 @@ const ArtistList = () => {
                 <Polaroid
                   profileImage={
                     selectedArtist
-                      ? selectedArtist.profileImage
-                      : artists[0].profileImage
+                      ? selectedArtist.profileImage.url
+                      : artists[0].profileImage.url
                   }
                   signature={
                     selectedArtist

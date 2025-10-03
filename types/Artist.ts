@@ -10,7 +10,7 @@ export type Artist = {
   _createdAt: string;
   name: string;
   slug?: string;
-  profileImage: string;
+  profileImage: { url: string };
   backgroundImage?: string;
   signature: string;
   spotifyEmbedUrl?: string;

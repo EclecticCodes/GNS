@@ -51,7 +51,7 @@ const project = {
     },
     {
       name: "releaseYear",
-      type: "string",
+      type: "number",
       title: "Release Year",
     },
   ],

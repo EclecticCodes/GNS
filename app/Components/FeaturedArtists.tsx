@@ -11,18 +11,19 @@ type Props = {
 };
 
 const FeaturedArtists = ({ artists }: Props) => {
+  const limitedArtists = artists.slice(0, 2);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [direction, setDirection] = useState<"prev" | "next">("next");
 
   const handleNextClick = () => {
     setDirection("next");
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % artists.length);
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % limitedArtists.length);
   };
 
   const handlePrevClick = () => {
     setDirection("prev");
     setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? artists.length - 1 : prevIndex - 1
+      prevIndex === 0 ? limitedArtists.length - 1 : prevIndex - 1
     );
   };
 
@@ -43,7 +44,7 @@ const FeaturedArtists = ({ artists }: Props) => {
 
   return (
     <>
-      {artists && artists.length > 0 && (
+      {limitedArtists && limitedArtists.length > 0 && (
         <section className="p-8 flex flex-col gap-4 justify-center items-center">
           <h2 className="font-bold text-4xl pb-12">FEATURED ARTISTS</h2>
           <div className="flex flex-col gap-4 justify-center items-center">
@@ -59,11 +60,11 @@ const FeaturedArtists = ({ artists }: Props) => {
                 className="flex flex-col gap-4 justify-center items-center"
               >
                 <Polaroid
-                  profileImage={artists[currentIndex].profileImage}
-                  signature={artists[currentIndex].signature}
+                  profileImage={limitedArtists[currentIndex].profileImage.url}
+                  signature={limitedArtists[currentIndex].signature}
                 />
                 <h3 className="font-bold text-2xl">
-                  {artists[currentIndex].name.toUpperCase()}
+                  {limitedArtists[currentIndex].name.toUpperCase()}
                 </h3>
               </motion.div>
             </AnimatePresence>
@@ -89,7 +90,7 @@ const FeaturedArtists = ({ artists }: Props) => {
               </motion.button>
               <span className="text-xl gap-8">
                 <span>{currentIndex + 1}</span> <span>/</span>{" "}
-                <span>{artists.length}</span>
+                <span>{limitedArtists.length}</span>
               </span>
               <motion.button
                 onClick={handleNextClick}
