@@ -217,3 +217,28 @@ export async function getAllArtistsWithProjects() {
   }
 }
 
+export async function getMains() {
+  try {
+    const data = await strapiClient.fetch("/mains?populate=*", {
+      next: { revalidate },
+    });
+
+    // Transform the response to only include the required fields
+    const mains = (data.data || []).map((rawMain: any) => ({
+      mainheading: rawMain.mainheading || "",
+      para: rawMain.para || "",
+      formats: {
+        small: {
+          url: rawMain.headericon?.formats?.small?.url || "",
+        },
+      },
+    }));
+
+    console.log("Fetched Strapi Mains:", mains);
+    return mains;
+  } catch (error) {
+    console.error("Error fetching mains from Strapi:", error);
+    return [];
+  }
+}
+
