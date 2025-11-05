@@ -9,9 +9,9 @@ import strapiClient from "@/strapi/strapi-client";
 const headers = [
   { key: "home", name: "Home", route: "/" },
   { key: "artists", name: "Artists", route: "/artists" },
-  //{ key: "shows", name: "Shows", route: "/shows" },
+
   { key: "about", name: "About", route: "/about" },
- // { key: "store", name: "Store", route: "/store" },
+ 
 ];
 
 const Navbar = () => {
@@ -50,13 +50,13 @@ const Navbar = () => {
 
   useEffect(() => {
     window.addEventListener("resize", handleResize);
-    handleResize(); // Initial check to set the correct menu state on page load
+    handleResize(); 
     return () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
 
-  // Fetch mains data for logo image
+  
   useEffect(() => {
     const fetchMains = async () => {
       try {
@@ -92,7 +92,7 @@ const Navbar = () => {
     fetchMains();
   }, []);
 
-  // Early return for admin routes after hooks
+  
   if (isAdminPath) {
     return null;
   }
@@ -210,7 +210,6 @@ const Navbar = () => {
         </section>
       </nav>
 
-      {/* Overlay for Mobile Menu */}
       <div
         className={`md:hidden fixed inset-0 z-40 bg-background flex flex-col justify-center items-center transition-all duration-300 ${
           menuOpen ? "visible opacity-100" : "invisible opacity-0"

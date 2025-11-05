@@ -13,7 +13,7 @@ export async function getArtists(): Promise<Artist[]> {
     );
     console.log("Fetched Strapi Artists:", data.data);
 
-    // Map Strapi data to expected format
+   
     const artists = (data.data || []).map((rawArtist: any) => ({
       _id: rawArtist.documentId || rawArtist.id,
       _createdAt: rawArtist.createdAt,
@@ -223,7 +223,7 @@ export async function getMains() {
       next: { revalidate },
     });
 
-    // Transform the response to only include the required fields
+
     const mains = (data.data || []).map((rawMain: any) => ({
       mainheading: rawMain.mainheading || "",
       para: rawMain.para || "",
