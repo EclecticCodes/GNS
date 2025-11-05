@@ -13,7 +13,7 @@ const headers = [
   { key: "about", name: "About", route: "/about" },
  
 ];
-
+//test
 const Navbar = () => {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
