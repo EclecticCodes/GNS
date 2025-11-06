@@ -9,11 +9,11 @@ import strapiClient from "@/strapi/strapi-client";
 const headers = [
   { key: "home", name: "Home", route: "/" },
   { key: "artists", name: "Artists", route: "/artists" },
-
+  //{ key: "shows", name: "Shows", route: "/shows" },
   { key: "about", name: "About", route: "/about" },
- 
+ // { key: "store", name: "Store", route: "/store" },
 ];
-//test
+
 const Navbar = () => {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
@@ -210,6 +210,7 @@ const Navbar = () => {
         </section>
       </nav>
 
+      {/* Overlay for Mobile Menu */}
       <div
         className={`md:hidden fixed inset-0 z-40 bg-background flex flex-col justify-center items-center transition-all duration-300 ${
           menuOpen ? "visible opacity-100" : "invisible opacity-0"
