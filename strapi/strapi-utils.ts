@@ -13,7 +13,7 @@ export async function getArtists(): Promise<Artist[]> {
     );
     console.log("Fetched Strapi Artists:", data.data);
 
-    // Map Strapi data to expected format
+   
     const artists = (data.data || []).map((rawArtist: any) => ({
       _id: rawArtist.documentId || rawArtist.id,
       _createdAt: rawArtist.createdAt,
@@ -214,6 +214,31 @@ export async function getAllArtistsWithProjects() {
       artists: [],
       featuredProjects: [],
     };
+  }
+}
+
+export async function getMains() {
+  try {
+    const data = await strapiClient.fetch("/mains?populate=*", {
+      next: { revalidate },
+    });
+
+
+    const mains = (data.data || []).map((rawMain: any) => ({
+      mainheading: rawMain.mainheading || "",
+      para: rawMain.para || "",
+      formats: {
+        small: {
+          url: rawMain.headericon?.formats?.small?.url || "",
+        },
+      },
+    }));
+
+    console.log("Fetched Strapi Mains:", mains);
+    return mains;
+  } catch (error) {
+    console.error("Error fetching mains from Strapi:", error);
+    return [];
   }
 }
 

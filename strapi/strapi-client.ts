@@ -2,7 +2,7 @@ const STRAPI_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:1337';
 
 export const strapiClient = {
   baseURL: STRAPI_URL,
-  apiURL: `${STRAPI_URL}/api`,
+  apiURL: `${STRAPI_URL}`,
   
   async fetch(endpoint: string, options: RequestInit = {}) {
     const url = `${this.apiURL}${endpoint}`;

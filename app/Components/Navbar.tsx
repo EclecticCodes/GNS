@@ -3,6 +3,8 @@
 import { motion } from "framer-motion";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import Image from "next/image";
+import strapiClient from "@/strapi/strapi-client";
 
 const headers = [
   { key: "home", name: "Home", route: "/" },
@@ -16,8 +18,8 @@ const Navbar = () => {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [logoImage, setLogoImage] = useState<string | null>(null);
 
-  // Refactor: Moved the conditional return statement below hook calls
   const isAdminPath = pathname.startsWith("/admin");
 
   useEffect(() => {
@@ -40,23 +42,57 @@ const Navbar = () => {
     };
   }, [pathname, isAdminPath]);
 
-  // Function to check screen size and update menuOpen state
   const handleResize = () => {
     if (window.innerWidth >= 768) {
-      setMenuOpen(false); // Automatically close the menu if the screen width is >= 768px (e.g., when switching to a larger screen)
+      setMenuOpen(false);
     }
   };
 
   useEffect(() => {
     window.addEventListener("resize", handleResize);
-    handleResize(); // Initial check to set the correct menu state on page load
-
+    handleResize(); 
     return () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
 
-  // Early return for admin routes after hooks
+  
+  useEffect(() => {
+    const fetchMains = async () => {
+      try {
+        const data = await strapiClient.fetch("/mains?populate=*");
+        console.log("Full mains data:", data);
+        if (data.data && data.data.length > 0) {
+          const main = data.data[0];
+          console.log("Main object:", main);
+          console.log("Headericon:", main.headericon);
+          const imageUrl = main.headericon?.formats?.small?.url;
+          console.log("imageUrl (relative):", imageUrl);
+          if (imageUrl) {
+
+            let baseURL = strapiClient.baseURL;
+            baseURL = baseURL.replace(/\/api\/?$/, '');
+            const fullImageUrl = imageUrl.startsWith('http') 
+              ? imageUrl 
+              : `${baseURL}${imageUrl}`;
+            console.log("baseURL used:", baseURL);
+            console.log("fullImageUrl:", fullImageUrl);
+            setLogoImage(fullImageUrl);
+          } else {
+            console.warn("No image URL found in mains data");
+          }
+        } else {
+          console.warn("No mains data found");
+        }
+      } catch (error) {
+        console.error("Error fetching mains for logo:", error);
+      }
+    };
+
+    fetchMains();
+  }, []);
+
+  
   if (isAdminPath) {
     return null;
   }
@@ -81,9 +117,28 @@ const Navbar = () => {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.8 }}
           >
-            <span className="self-center text-4xl whitespace-nowrap dark:text-white font-erica">
-              GNS
-            </span>
+            {logoImage ? (
+              <Image
+                src={logoImage}
+                alt="GNS Logo"
+                width={120}
+                height={54}
+                className="h-auto w-auto max-h-14"
+                priority
+                unoptimized={logoImage.includes('localhost')}
+                onError={(e) => {
+                  console.error("Image failed to load:", logoImage);
+                  console.error("Error event:", e);
+                }}
+                onLoad={() => {
+                  console.log("Image loaded successfully:", logoImage);
+                }}
+              />
+            ) : (
+              <span className="self-center text-4xl whitespace-nowrap dark:text-white font-erica">
+                GNS
+              </span>
+            )}
           </motion.a>
           <button
             type="button"
