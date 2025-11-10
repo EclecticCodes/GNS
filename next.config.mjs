@@ -10,7 +10,7 @@ const nextConfig = {
       },
       {
         protocol: 'https',
-        hostname: '**',
+        hostname: 'stylish-success-f82a3771a1.strapiapp.com',
         pathname: '/**',
       },
     ],

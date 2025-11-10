@@ -1,13 +1,14 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import jumbotronOne from "../../public/images/jumbotronFour.jpg";
+import jumbotronFour from "../../public/images/jumbotronFour.jpg";
+import jumbotronOne from "../../public/images/jumbotronOne.png";
 import jumbotronTwo from "../../public/images/jumbotronTwo.jpg";
 import jumbotronThree from "../../public/images/jumbotronThree.jpg";
 
 type Props = {};
 
-const images = [jumbotronOne.src, jumbotronTwo.src, jumbotronThree.src];
+const images = [jumbotronFour.src, jumbotronOne.src,  jumbotronTwo.src, jumbotronThree.src];
 
 const Jumbotron = (props: Props) => {
   console.log("Jumbotron rerendered");
