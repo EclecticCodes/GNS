@@ -9,7 +9,7 @@ export default function AboutPage() {
       {/* Header Section */}
       <section className="text-center my-8">
         <Header>
-          <h1 className="text-4xl font-bold">About Us</h1>
+          <h1 className="text-4xl font-bold"> About Us </h1>
         </Header>
       </section>
 
@@ -30,7 +30,7 @@ export default function AboutPage() {
         <section className="flex-1">
           <h2 className="text-4xl font-bold mb-4">Our Story</h2>
           <p className="text-lg mb-4">
-            Welcome to Good Natured Souls, a media company thriving in the cultural epicenter of New York City. We&apos;re here to nurture and showcase the vibrant, authentic talent that our city has to offer. Our name reflects our core belief that creativity flourishes best when it&apos;s rooted in kindness, purpose, and a deep connection to the community. Guided by our motto, <strong>&quot;Exist Altruistic&quot;</strong>, we aim to be a beacon of positivity and artistic growth and set the standard for excellence in the music industry.
+            Welcome to Good Natured Souls, a media company thriving in the cultural epicenter of New York City. We &apos;re here to nurture and showcase the vibrant, authentic talent that our city has to offer. Our name reflects our core belief that creativity flourishes best when it&apos;s rooted in kindness, purpose, and a deep connection to the community. Guided by our motto, <strong>&quot;Exist Altruistic&quot;</strong>, we aim to be a beacon of positivity and artistic growth and set the standard for excellence in the music industry.
           </p>
 
           <h3 className="text-2xl font-bold mb-4">Business Inquiries</h3>
