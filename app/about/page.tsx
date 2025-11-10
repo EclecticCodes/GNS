@@ -18,7 +18,7 @@ export default function AboutPage() {
         {/* Left Side - Image Container */}
         <section className="flex-1 flex justify-center">
           <Image
-            src="/images/jumbotronfour.jpg"
+            src="/images/jumbotronFour.jpg"
             alt="About Us"
             width={400}
             height={400}
