@@ -10,7 +10,7 @@ const nextConfig = {
       },
       {
         protocol: 'https',
-        hostname: '*goodnaturedsouls.com',
+        hostname: 'stylish-success-f82a3771a1.strapiapp.com',
         pathname: '/**',
       },
     ],
