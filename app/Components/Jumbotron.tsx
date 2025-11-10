@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import jumbotronFour from "../../public/images/jumbotronFour.jpg";
-import jumbotronOne from "../../public/images/jumbotronOne.jpg";
+import jumbotronOne from "../../public/images/jumbotronOne.png";
 import jumbotronTwo from "../../public/images/jumbotronTwo.jpg";
 import jumbotronThree from "../../public/images/jumbotronThree.jpg";
 
