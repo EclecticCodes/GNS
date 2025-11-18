@@ -242,3 +242,39 @@ export async function getMains() {
   }
 }
 
+export async function getAboutPage() {
+  try {
+ 
+    const data = await strapiClient.fetch("/about-uses?populate=*", {
+      next: { revalidate },
+    });
+
+    const aboutData = data.data?.[0];
+
+    if (!aboutData) {
+      console.warn("No about page data found in Strapi response");
+      return null;
+    }
+
+    const imageUrl = aboutData.aboutusimg?.url || "";
+    const imageAlt = aboutData.aboutusimg?.alternativeText || "About Us";
+
+    const aboutPage = {
+      title: aboutData.title || "About Us",
+      heading: aboutData.storyHeading || "Our Story",
+      text: aboutData.storyContent || "",
+      image: {
+        url: imageUrl,
+        alternativeText: imageAlt,
+      },
+      businessEmail: aboutData.businessEmail || "",
+    };
+
+    console.log("Fetched Strapi About Page:", aboutPage);
+    return aboutPage;
+  } catch (error) {
+    console.error("Error fetching about page from Strapi:", error);
+    return null;
+  }
+}
+
